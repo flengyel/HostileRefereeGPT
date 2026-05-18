@@ -1,20 +1,12 @@
 # HostileRefereeGPT
 
-HostileRefereeGPT is a small instruction repo for building a custom GPT that acts as an adversarial, evidence-bound top-journal referee.
+HostileRefereeGPT is a repository for maintaining GPT Builder instructions for an adversarial journal referee.
 
-The repo is not a software package. It is a controlled way to maintain GPT Builder instructions under version control.
+The repository stores editable source files and the built instruction file used in GPT Builder. The built file is committed because it is the deployed instruction text.
 
-The current deployed GPT is focused on:
+## Current build
 
-- category theory,
-- recursion categories / partiality,
-- logic and foundations.
-
-The built prompt is intentionally committed in `build/` because it is the actual text pasted into GPT Builder.
-
-## What this repo produces
-
-The source files are modular:
+The default build uses these files:
 
 ```text
 header.md
@@ -24,13 +16,13 @@ modules/recursion-categories.md
 modules/logic-foundations.md
 ```
 
-The build concatenates the selected inputs into one GPT Builder instruction payload:
+It produces:
 
 ```text
 build/hostile-referee-gpt-cat-rec-logic.prompt.md
 ```
 
-That built file is the thing you paste into the GPT Builder **Instructions** field.
+Paste that file into the GPT Builder **Instructions** field.
 
 ## Repository layout
 
@@ -47,70 +39,50 @@ HostileRefereeGPT/
 │   ├── category-theory.md
 │   ├── recursion-categories.md
 │   ├── logic-foundations.md
-│   ├── algebraic-topology.md              # optional, if added
-│   ├── algebraic-combinatorics.md         # optional, if added
-│   ├── probability-statistics.md          # optional, if added
-│   ├── algorithms-numerics.md             # optional, if added
-│   ├── empirical-computational.md         # optional, if added
-│   └── physics-units.md                   # optional, if added
+│   ├── algebraic-topology.md
+│   ├── algebraic-combinatorics.md
+│   ├── probability-statistics.md
+│   ├── algorithms-numerics.md
+│   ├── empirical-computational.md
+│   └── physics-units.md
 └── build/
     └── hostile-referee-gpt-cat-rec-logic.prompt.md
 ```
 
-Only the first three modules are selected by the default Makefile. Optional modules may exist in `modules/`, but they are not included unless `MODULES` is changed.
-
-## Design
-
-The repo has three layers.
-
-```text
-1. Source instructions
-   header.md, workflow.md, modules/*.md
-
-2. Built GPT instruction payload
-   build/hostile-referee-gpt-cat-rec-logic.prompt.md
-
-3. Custom GPT
-   GPT Builder Instructions field = contents of the built payload
-```
-
-The source files make editing manageable. The built file is the deployed instruction text. The custom GPT itself only needs the built text.
+Only the modules named in `Makefile` are included in the built prompt.
 
 ## File roles
 
 ### `header.md`
 
-Global referee discipline:
+Global rules for the referee:
 
-- adversarial top-journal role,
-- anti-charity rule,
-- no steelmanning,
-- no invented citations,
-- evidence hierarchy,
-- anchor rule,
-- severity rubric,
-- counterexample rule,
-- patch-after-failure rule,
-- recursive application rule.
+- adversarial review posture;
+- anti-charity rule;
+- no steelmanning;
+- no invented citations;
+- evidence hierarchy;
+- anchor requirement;
+- severity categories;
+- counterexample requirement;
+- patch-after-failure rule.
 
 ### `workflow.md`
 
-Review procedure and output scaffolding:
+Review procedure:
 
-- Audit mode vs Referee mode,
-- required output structure,
-- global bar check,
-- definition audit,
-- theorem/claim audit,
-- cross-section consistency audit,
-- acceptance gate,
+- Audit mode and Referee mode;
+- required output sections;
+- global bar check;
+- definition audit;
+- theorem and claim audit;
+- cross-section consistency audit;
+- acceptance gate;
 - final self-audit.
 
 ### `modules/*.md`
 
-Subject-specific libraries.
-
-Current default build:
+Subject-specific checks. The default module set is:
 
 ```text
 category-theory
@@ -118,30 +90,25 @@ recursion-categories
 logic-foundations
 ```
 
+Other module files may be kept in `modules/` without being included in the build.
+
 ### `build/`
 
-Committed generated prompt files.
-
-This repo intentionally commits `build/` because the built prompt is the operational artifact used in GPT Builder.
+Generated prompt files. These files are committed intentionally.
 
 ## Requirements
 
-For the Makefile workflow:
+The Makefile workflow requires:
 
-- Git,
-- `make`,
-- a POSIX-like shell with `cat` and `wc`.
+- Git;
+- `make`;
+- `cat`;
+- `wc`;
+- a shell that can run the commands in `Makefile`.
 
-On Windows, use one of:
+On Windows, Git Bash, WSL, or MSYS2 is sufficient. A PowerShell-only build is given below.
 
-- Git Bash,
-- WSL,
-- MSYS2,
-- another shell where `make`, `cat`, and `wc` are available.
-
-PowerShell-only instructions are included below.
-
-## Build the GPT instructions
+## Build
 
 Default build:
 
@@ -149,47 +116,25 @@ Default build:
 make
 ```
 
-Equivalent explicit build:
+Explicit build:
 
 ```sh
 make MODULES="category-theory recursion-categories logic-foundations"
 ```
 
-Expected output:
-
-```text
-Built build/hostile-referee-gpt-cat-rec-logic.prompt.md (... characters)
-```
-
-The Makefile enforces the GPT Builder instruction limit:
-
-```text
-8000 characters
-```
-
-If the built prompt exceeds the limit, the build fails.
-
-## Verify
-
-Run:
+Verify the build and the character limit:
 
 ```sh
 make verify
 ```
 
-This rebuilds the prompt, checks that the selected source files exist, and checks the character limit.
-
-## Clean
-
-Run:
+Remove generated files:
 
 ```sh
 make clean
 ```
 
-This removes `build/`.
-
-Because `build/` is committed intentionally, rebuild after cleaning:
+After `make clean`, rebuild before committing:
 
 ```sh
 make
@@ -198,7 +143,7 @@ git status
 
 ## PowerShell build without `make`
 
-If you are on Windows and do not want to install `make`, build manually from PowerShell:
+From the repository root:
 
 ```powershell
 New-Item -ItemType Directory -Force build | Out-Null
@@ -227,53 +172,51 @@ if ($chars -gt 8000) {
 }
 ```
 
-Then commit the rebuilt file if it changed.
-
 ## Use in GPT Builder
 
-Build first:
+Build and verify first:
 
 ```sh
 make verify
 ```
 
-Then open:
+Then copy the full contents of:
 
 ```text
 build/hostile-referee-gpt-cat-rec-logic.prompt.md
 ```
 
-Copy the entire file and paste it into the GPT Builder **Instructions** field.
+into the GPT Builder **Instructions** field.
 
-Suggested GPT configuration:
+Suggested GPT fields:
 
 ```text
 Name:
 HostileRefereeGPT — Cat/Rec/Logic
 
 Description:
-Adversarial, evidence-bound top-journal referee for mathematics manuscripts, focused on category theory, recursion categories/partiality, and logic/foundations.
+Adversarial journal referee for manuscripts involving category theory, recursion categories, and logic or foundations.
 ```
 
 Suggested conversation starters:
 
 ```text
-Act as a hostile top-journal referee. Audit this manuscript in Audit mode.
+Audit this manuscript in Audit mode.
 ```
 
 ```text
-Run the category-theory, recursion-category, and logic/foundations checks on this paper. Give anchored kill-shots first.
+Run the category-theory, recursion-category, and logic/foundations checks. Give anchored kill-shots first.
 ```
 
 ```text
-Switch to Referee mode and compose a one-page rejection after the audit.
+Switch to Referee mode and write the rejection after the audit.
 ```
 
-The source files do not need to be uploaded as GPT Knowledge. The built prompt belongs in the Instructions field.
+Do not upload the source files as GPT Knowledge merely to provide instructions. The built prompt belongs in the Instructions field.
 
-## Changing selected modules
+## Change the selected modules
 
-The Makefile currently uses:
+The default module selection is set in `Makefile`:
 
 ```make
 MODULES ?= category-theory recursion-categories logic-foundations
@@ -281,73 +224,65 @@ OUT := build/hostile-referee-gpt-cat-rec-logic.prompt.md
 LIMIT := 8000
 ```
 
-To test a different selection temporarily:
+To test a different selection:
 
 ```sh
 make MODULES="category-theory logic-foundations"
 ```
 
-To make a different selection permanent, edit `MODULES` in `Makefile`.
+To make a selection permanent, edit `MODULES` in `Makefile`.
 
-If you permanently change the selected modules, also consider changing `OUT` so the filename remains honest. For example:
+If the selected modules change, also update `OUT` so the filename describes the build.
 
-```make
-OUT := build/hostile-referee-gpt-cat-logic.prompt.md
-```
+## Add a module
 
-Keep the built prompt under 8000 characters.
-
-## Adding a new module
-
-Create a new file in `modules/`, for example:
+Create a file in `modules/`, for example:
 
 ```text
 modules/algebraic-topology.md
 ```
 
-Keep it compact. The GPT Builder instruction field is the limiting resource.
+Keep the module short enough for the final prompt to remain under the GPT Builder limit.
 
-A good module should include:
+A module should contain:
 
-- trigger terms,
-- failure modes,
-- required checks,
-- toy tests or minimal counterexamples,
+- trigger terms;
+- failure modes;
+- required checks;
+- toy tests or minimal counterexamples;
 - output requirements.
 
-Then include it temporarily:
+Test the module with:
 
 ```sh
 make MODULES="category-theory recursion-categories logic-foundations algebraic-topology"
 ```
 
-If it fits and should be permanent, update `Makefile`.
+If the build fits and the module should be part of the deployed GPT, update `Makefile`.
 
-## Character budget discipline
+## Character limit
 
 The built prompt must be at most 8000 characters.
 
-When adding text, prefer compact imperatives over long explanations.
+Check the length with:
 
-Bad:
-
-```text
-The referee should carefully consider whether the author may have intended a different meaning.
+```sh
+make verify
 ```
 
-Good:
+or:
+
+```sh
+wc -m build/hostile-referee-gpt-cat-rec-logic.prompt.md
+```
+
+When editing, prefer short imperatives.
+
+Examples:
 
 ```text
 Do not infer intent. Ambiguity is a defect.
 ```
-
-Bad:
-
-```text
-When a functor is mentioned, the model should make sure that the construction is actually functorial.
-```
-
-Good:
 
 ```text
 For each functor: source, target, object map, arrow map, variance, identity, composition.
@@ -355,7 +290,7 @@ For each functor: source, target, object map, arrow map, variance, identity, com
 
 ## Local Git setup
 
-From inside the repo:
+From the repository root:
 
 ```sh
 git init
@@ -366,14 +301,14 @@ git commit -m "Initial HostileRefereeGPT instruction repo"
 
 ## GitHub remote
 
-For the GitHub user `flengyel` and repo `HostileRefereeGPT`:
+For GitHub user `flengyel` and repository `HostileRefereeGPT`:
 
 ```sh
 git remote add origin git@github.com:flengyel/HostileRefereeGPT.git
 git push -u origin main
 ```
 
-If the remote already exists but is wrong:
+If `origin` already exists and is wrong:
 
 ```sh
 git remote set-url origin git@github.com:flengyel/HostileRefereeGPT.git
@@ -387,7 +322,7 @@ git remote set-url origin https://github.com/flengyel/HostileRefereeGPT.git
 git push -u origin main
 ```
 
-## Normal update workflow
+## Update workflow
 
 After editing source instructions:
 
@@ -399,120 +334,48 @@ git commit -m "Update GPT referee instructions"
 git push
 ```
 
-Then paste the updated contents of:
+Then update the GPT Builder Instructions field with the contents of:
 
 ```text
 build/hostile-referee-gpt-cat-rec-logic.prompt.md
 ```
 
-back into the GPT Builder Instructions field.
-
-## Recommended commit habits
-
-Commit source and build together.
-
-Good:
-
-```text
-Update recursion-category checks
-```
-
-with changes to:
-
-```text
-modules/recursion-categories.md
-build/hostile-referee-gpt-cat-rec-logic.prompt.md
-```
-
-Avoid committing source changes without rebuilding the prompt, unless the source file is not part of the selected build.
+Commit source and build together when the built prompt changes.
 
 ## Troubleshooting
 
 ### `make` is not recognized
 
-Use Git Bash, WSL, MSYS2, or the PowerShell manual build above.
+Use Git Bash, WSL, MSYS2, or the PowerShell build above.
 
-### Build exceeds 8000 characters
+### The build exceeds 8000 characters
 
-Remove lower-priority checks, compress wording, or change the selected modules.
-
-Run:
-
-```sh
-wc -m build/hostile-referee-gpt-cat-rec-logic.prompt.md
-```
+Remove lower-priority text, shorten module wording, or reduce the selected module set.
 
 ### GPT Builder refuses the instructions
 
-Check the character count:
+Run:
 
 ```sh
 make verify
 ```
 
-Then paste only the contents of the built prompt file, not the whole repo.
+Then paste only the contents of the built prompt file.
 
-### The GPT is too soft
+### The GPT gives comments without anchors
 
-Strengthen `header.md`, especially:
+Edit `workflow.md` to strengthen the anchor requirement, finding structure, and final self-audit. Rebuild and update GPT Builder.
 
-- anti-charity,
-- no steelmanning,
-- ambiguity is a defect,
-- patch only after failure is shown.
+### The GPT misses a subject-specific error
 
-Then rebuild and repaste.
-
-### The GPT misses a domain-specific error
-
-Add or sharpen the relevant module.
-
-For example:
-
-```text
-modules/recursion-categories.md
-```
-
-for partiality, extensionality, Rice/Rice-Shapiro, and recursion-category issues.
-
-### The GPT gives generic comments instead of anchored findings
-
-Strengthen `workflow.md`, especially:
-
-- anchor rule,
-- required finding structure,
-- kill-shots first,
-- counterexample or missing hypothesis,
-- final self-audit.
-
-Then rebuild and repaste.
+Edit the relevant file in `modules/`. Rebuild and update GPT Builder.
 
 ## License
 
 MIT. See `LICENSE`.
 
-## Current status
-
-Default built GPT:
-
-```text
-HostileRefereeGPT — Cat/Rec/Logic
-```
-
-Default selected modules:
-
-```text
-category-theory recursion-categories logic-foundations
-```
-
-Built instruction payload:
+## Default artifact
 
 ```text
 build/hostile-referee-gpt-cat-rec-logic.prompt.md
-```
-
-Maximum instruction size:
-
-```text
-8000 characters
 ```

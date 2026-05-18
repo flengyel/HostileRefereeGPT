@@ -4,6 +4,27 @@ HostileRefereeGPT is a repository for maintaining GPT Builder instructions for a
 
 The repository stores editable source files and the built instruction file used in GPT Builder. The built file is committed because it is the deployed instruction text.
 
+## Intended use and prohibited use
+
+This project is an adversarial self-audit tool for mathematical writing. It is intended for:
+
+- authors auditing their own manuscripts, drafts, lecture notes, or private notes;
+- coauthors reviewing shared work;
+- instructors or students analyzing material they are authorized to share;
+- discussion of public mathematical texts where no peer-review confidentiality obligation is involved.
+
+It is not a peer-review automation tool.
+
+Do not use this project to generate, substantially draft, or outsource a referee report for someone else’s confidential submission unless the relevant editor and journal explicitly permit that use and all confidentiality obligations are satisfied. Undisclosed or unauthorized use of generative AI in peer review may violate journal policy, peer-review confidentiality, and research-integrity norms. Some publishers and mathematical societies explicitly prohibit reviewers from uploading manuscripts into AI tools or using AI to carry out the review of a submitted manuscript.
+
+In particular, this project must not be used to:
+- upload or analyze a confidential manuscript that you received as a referee, editor, or committee member without explicit authorization;
+- produce a review-shaped report for submission to a journal while concealing AI assistance;
+- replace the reviewer’s own expert judgment;
+- evade journal, publisher, society, institutional, or funding-body policies on AI use in peer review.
+
+Permitted use does not remove responsibility. Users remain fully responsible for checking all mathematical claims, citations, severity judgments, and conclusions produced by the tool.
+
 ## Current build
 
 The default build uses these files:

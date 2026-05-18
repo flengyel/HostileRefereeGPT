@@ -108,7 +108,7 @@ Review procedure and output scaffolding:
 
 ### `modules/*.md`
 
-Subject-specific failure-mode libraries.
+Subject-specific libraries.
 
 Current default build:
 
@@ -117,8 +117,6 @@ category-theory
 recursion-categories
 logic-foundations
 ```
-
-These are deliberately modules, not separate GPTs. A manuscript about Rice-Shapiro in recursion categories may need all three checks inside one GPT.
 
 ### `build/`
 

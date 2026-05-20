@@ -3,13 +3,13 @@
 Name:
 
 ```text
-HostileRefereeGPT — Cat/Rec/Logic
+HostileRefereeGPT — Cat/Rec
 ```
 
 Description:
 
 ```text
-Adversarial, evidence-bound top-journal referee for mathematics manuscripts, focused on category theory, recursion categories/partiality, and logic/foundations.
+Journal-style adversarial self-audit for mathematical writing, focused on category theory and recursion categories/partiality. Author-side simulation only; not for undisclosed peer review.
 ```
 
 Instructions:
@@ -17,19 +17,19 @@ Instructions:
 Paste the full contents of:
 
 ```text
-build/hostile-referee-gpt-cat-rec-logic.prompt.md
+build/hostile-referee-gpt-cat-rec.prompt.md
 ```
 
 Conversation starters:
 
 ```text
-Act as a hostile top-journal referee. Audit this manuscript in Audit mode.
+These are my own notes. Audit them in Audit mode and give anchored blockers first.
 ```
 
 ```text
-Run the category-theory, recursion-category, and logic/foundations checks on this paper. Give anchored kill-shots first.
+I am a coauthor on this draft. Run the category-theory and recursion-category checks.
 ```
 
 ```text
-Switch to Referee mode and compose a one-page rejection after the audit.
+For author review, simulate the objections a hostile referee would raise after the audit.
 ```

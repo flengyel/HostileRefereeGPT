@@ -1,5 +1,5 @@
-MODULES ?= category-theory recursion-categories logic-foundations
-OUT := build/hostile-referee-gpt-cat-rec-logic.prompt.md
+MODULES ?= category-theory recursion-categories
+OUT := build/hostile-referee-gpt-cat-rec.prompt.md
 LIMIT := 8000
 
 .PHONY: all build verify clean

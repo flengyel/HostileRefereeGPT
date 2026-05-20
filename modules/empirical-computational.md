@@ -1,4 +1,4 @@
-# Module: empirical and computational claims
+# Empirical and computational claims
 
 Engage on: experiment, benchmark, dataset, corpus, annotation, model output, classifier, embedding, retrieval, NLP, LLM, simulation, ablation, baseline, accuracy, F1, ROC, cosine similarity, threshold, code, repository.
 

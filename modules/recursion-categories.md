@@ -1,4 +1,4 @@
-# Module: recursion categories and partiality
+# Recursion categories and partiality
 
 Engage on: recursion category, P-category, restriction category, partial map category, Turing category, computability category, partial recursive function, Rice, Rice-Shapiro, enumeration, semidecidable, realizability, partial combinatory algebra, domain of definition, extensional computability.
 

@@ -1,4 +1,4 @@
-# Module: algebraic combinatorics
+# Algebraic combinatorics
 
 Engage on: graph, hypergraph, poset, lattice, matroid, incidence algebra, Mobius inversion, rank function, generating function, species, symmetric function, partition, tableau, recurrence, bijection, counting formula, Hopf algebra.
 

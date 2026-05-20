@@ -1,4 +1,4 @@
-# Module: algebraic topology and homology
+# Algebraic topology and homology
 
 Engage on: chain complex, boundary, coboundary, homology, cohomology, simplicial, CW complex, cell complex, exact sequence, spectral sequence, sheaf cohomology, reduced homology, quotient, collapse, tensor product, diagonal.
 

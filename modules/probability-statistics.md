@@ -1,4 +1,4 @@
-# Module: probability and statistics
+# Probability and statistics
 
 Engage on: probability, random variable, expectation, variance, distribution, independence, conditioning, concentration, asymptotic, estimator, likelihood, Bayesian, confidence interval, credible interval, p-value, sampling, causal, random graph, randomized algorithm.
 

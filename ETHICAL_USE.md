@@ -14,7 +14,7 @@ The following uses are permitted:
 - methodological commentary on the tool itself, including running the tool on its own output;
 - teaching how to read a mathematical paper critically.
 
-Reading or auditing a public preprint for one's own purposes is distinct from evaluating it under a confidential assignment from a journal, conference, funder, institution, or committee. The first is permitted; the second falls under the prohibited category even if the text is also publicly available.
+Reading or auditing a public preprint for one's own purposes is distinct from evaluating it under a confidential assignment from a journal, conference, funder, institution, or committee. The first is permitted; the second falls under the prohibited category even if the text is also publicly available. The prohibition here is not based on the confidentiality of the text, which is public, but on the evaluator role: a confidential assignment carries obligations of personal judgment and disclosure that undisclosed delegation to this tool would evade.
 
 ## Prohibited use
 
@@ -46,7 +46,7 @@ References, accessed 2026-05-19:
 
 Some venues may, now or in the future, authorize AI-assisted review under specific protocols with disclosure, confidentiality safeguards, and approved infrastructure. This document does not claim that such use is universally impossible. It says that this public tool is not built for that role.
 
-Any authorized peer-review or confidential-evaluation use requires explicit permission from the relevant editor, venue, and policy authority; compliance with all confidentiality and disclosure rules; independent verification of every substantive claim; and disclosure of AI assistance. Such use should occur only under the approved protocol or deployment. The public prompt's default refusal rule for confidential third-party material remains in force outside such an approved protocol or deployment.
+This project's position is that any authorized peer-review or confidential-evaluation use requires explicit permission from the relevant editor, venue, or policy authority; compliance with all confidentiality and disclosure rules; independent verification of every substantive claim; and disclosure of AI assistance. Some venues authorize narrow, declared uses (such as post-review language assistance) through standing policy without a separate permission step; this project is deliberately stricter than the most permissive such policies.
 
 ## License relationship
 

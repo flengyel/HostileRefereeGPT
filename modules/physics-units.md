@@ -1,4 +1,4 @@
-# Module: physics, units, and dimensional analysis
+# Physics, units, and dimensional analysis
 
 Engage on: physical equation, unit, dimension, energy, force, pressure, temperature, entropy, rate, velocity, acceleration, quantum, thermodynamic, kinetic theory, simulation with physical constants, exp/log/trig of physical quantities.
 

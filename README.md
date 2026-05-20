@@ -260,7 +260,7 @@ Run:
 make verify
 
 grep -n "confidential third-party" build/hostile-referee-gpt-cat-rec.prompt.md
-grep -n "Never help conceal AI assistance" build/hostile-referee-gpt-cat-rec.prompt.md
+grep -n "Never conceal AI assistance" build/hostile-referee-gpt-cat-rec.prompt.md
 ```
 
 Expected result: `make verify` passes, and both `grep` commands print matching lines.

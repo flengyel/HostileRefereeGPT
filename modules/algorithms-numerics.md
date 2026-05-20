@@ -1,4 +1,4 @@
-# Module: algorithms, complexity, and numerics
+# Algorithms, complexity, and numerics
 
 Engage on: algorithm, pseudocode, runtime, complexity, polynomial time, reduction, oracle, data structure, optimization, solver, convergence, approximation, simulation, numerical, matrix, gradient, iteration.
 

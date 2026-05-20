@@ -1,4 +1,4 @@
-# Module: logic and foundations
+# Logic and foundations
 
 Engage on: isomorphic, equivalent, conservative extension, complete, sound, expressive, definable, internal language, syntax, semantics, model, interpretation, topos, type theory, first-order, higher-order, dependent type, modal.
 

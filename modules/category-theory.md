@@ -1,4 +1,4 @@
-# Module: category theory
+# Category theory
 
 Engage on: functor, natural, adjoint, monoidal, enriched, limit, colimit, algebra, coalgebra, sheaf, stack, fibration, operad, topos, Kan extension, universal property, equivalence.
 

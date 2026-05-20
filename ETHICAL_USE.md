@@ -37,10 +37,10 @@ Several publishers and societies have published policies on AI use in peer revie
 
 References, accessed 2026-05-19:
 
-- London Mathematical Society, AI policy: https://www.lms.ac.uk/publications/policies/AI
-- Nature Portfolio, AI editorial policies: https://www.nature.com/nature-portfolio/editorial-policies/ai
-- Elsevier, generative AI policies for journals: https://www.elsevier.com/about/policies-and-standards/generative-ai-policies-for-journals
-- Taylor & Francis, AI policy: https://taylorandfrancis.com/our-policies/ai-policy/
+- London Mathematical Society, AI policy: [https://www.lms.ac.uk/publications/policies/AI](https://www.lms.ac.uk/publications/policies/AI)
+- Nature Portfolio, AI editorial policies: [https://www.nature.com/nature-portfolio/editorial-policies/ai](https://www.nature.com/nature-portfolio/editorial-policies/ai)
+- Elsevier, generative AI policies for journals: [https://www.elsevier.com/about/policies-and-standards/generative-ai-policies-for-journals](https://www.elsevier.com/about/policies-and-standards/generative-ai-policies-for-journals)
+- Taylor & Francis, AI policy: [https://taylorandfrancis.com/our-policies/ai-policy/](https://taylorandfrancis.com/our-policies/ai-policy/)
 
 ## Edge cases
 

@@ -27,7 +27,7 @@ In particular, the tool must not be used to:
 - replace the evaluator's own expert judgment in any confidential review or evaluation;
 - evade journal, publisher, society, institutional, funding-body, or committee policies on confidentiality, disclosure, or AI use.
 
-The built prompt includes a refusal rule: if the user indicates that the material under audit is confidential third-party material received through a referee, editorial, committee, or evaluator role, the tool refuses to produce audit or review output and explains the confidentiality issue. The refusal is part of the tool's design. Removing or weakening the refusal rule is contrary to the intended use of this project.
+The built prompt includes a refusal rule: if the user indicates that the requested audit or review is connected to a confidential referee, editorial, committee, or evaluator role for third-party work, the tool refuses to produce audit or review output and explains the confidentiality and evaluator-role issue. This applies even when the same submitted text is also publicly available; the trigger is the confidential evaluation role, not the public or private status of the text. The refusal is part of the tool's design. Removing or weakening the refusal rule is contrary to the intended use of this project.
 
 ## Rationale
 
@@ -54,4 +54,4 @@ The code and instructions in this repository are released under the MIT License.
 
 ## Responsibility
 
-The MIT License's no-warranty and no-liability clauses apply to this repository. Users are responsible for complying with applicable confidentiality, disclosure, and research-integrity obligations. The README, this document, and the prompt-level refusal rule state the intended use of the project; they are not a substitute for the policies that apply in a particular venue or institution.
+The MIT License's no-warranty and no-liability clauses apply to this repository. Users are responsible for complying with applicable confidentiality, disclosure, and research-integrity obligations. Omitting or misstating facts about the user's role does not make a prohibited use permitted. The README, this document, and the prompt-level refusal rule state the intended use of the project; they are not a substitute for the policies that apply in a particular venue or institution.

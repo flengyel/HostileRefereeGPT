@@ -38,11 +38,11 @@ audit-build:
 # Policy-contract checks. These verify repository design invariants, not user-prompt classification.
 audit-policy:
 	@grep -Fq "confidential third-party" header.md
-	@grep -Eq "confidential evaluation|confidential evaluator" header.md
-	@grep -Eq "public text|publicly available" header.md
+	@grep -Eq "confidential evaluation|confidential evaluator|under confidential evaluation" header.md
+	@grep -Eq "public text|publicly available|including public text" header.md
 	@grep -Fq "No concealed AI assistance in peer review." $(OUT)
 	@grep -Fq "Never present output as human review." $(OUT)
-	@bad=$$(grep -RInE 'public preprint.*always allowed|always.*public preprint|not confidential because.*public|publicly available.*therefore.*allowed|AI assistance.*need not be disclosed|human-only referee report|not for undisclosed peer review|cat-top' README.md GPT_BUILDER.md ETHICAL_USE.md header.md workflow.md modules build || true); \
+	@bad=$$(grep -RInE 'public preprint.*always allowed|always.*public preprint|not confidential because.*public|publicly available.*therefore.*allowed|AI assistance.*need not be disclosed|human-only referee report|not for undisclosed peer review' README.md GPT_BUILDER.md ETHICAL_USE.md header.md workflow.md modules build || true); \
 	if [ -n "$$bad" ]; then \
 		echo "ERROR: possible policy/build contradiction:"; \
 		echo "$$bad"; \

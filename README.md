@@ -311,14 +311,14 @@ The default module selection is set in `Makefile`:
 
 ```make
 MODULES ?= category-theory recursion-categories
-OUT := build/hostile-referee-gpt-cat-rec.prompt.md
+OUT ?= build/hostile-referee-gpt-cat-rec.prompt.md
 LIMIT := 8000
 ```
 
 To test a different selection:
 
 ```sh
-make MODULES="category-theory logic-foundations"
+make MODULES="category-theory logic-foundations" OUT=build/scratch.prompt.md
 ```
 
 To make a selection permanent, edit `MODULES` in `Makefile`.
@@ -346,10 +346,10 @@ A module should contain:
 Test the module with:
 
 ```sh
-make MODULES="category-theory algebraic-topology"
+make MODULES="category-theory algebraic-topology" OUT=build/hostile-referee-gpt-cat-top.prompt.md
 ```
 
-If the build fits and the module should be part of the deployed GPT, update `Makefile`.
+If the build fits within the 8000 character limit and the module should be included in the deployed GPT, update `Makefile`.
 
 ## Character limit
 

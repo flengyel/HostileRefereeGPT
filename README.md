@@ -132,7 +132,7 @@ Only the modules named in `Makefile` are included in the built prompt.
 Global rules for the self-audit GPT:
 
 - ethical-use and peer-review boundary;
-- refusal rule for confidential third-party review or evaluation material;
+- refusal rule for confidential evaluation of third-party work, including public text under such an assignment;
 - prohibition on concealing AI assistance in peer review;
 - adversarial review posture;
 - anti-charity rule;
@@ -288,7 +288,7 @@ Name:
 HostileRefereeGPT — Cat/Rec
 
 Description:
-Journal-style adversarial self-audit for mathematical writing involving category theory and recursion categories. Not for undisclosed peer review.
+Journal-style adversarial self-audit for mathematical writing involving category theory and recursion categories. Not for confidential evaluator use or peer review.
 ```
 
 Suggested conversation starters:

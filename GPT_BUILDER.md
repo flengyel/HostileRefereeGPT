@@ -9,7 +9,7 @@ HostileRefereeGPT — Cat/Rec
 Description:
 
 ```text
-Journal-style adversarial self-audit for mathematical writing, focused on category theory and recursion categories/partiality. Author-side simulation only; not for undisclosed peer review.
+Journal-style adversarial self-audit for mathematical writing, focused on category theory and recursion categories/partiality. Author-side simulation only; not for confidential evaluator use.
 ```
 
 Instructions:

@@ -18,12 +18,12 @@ Reading or auditing a public preprint for one's own purposes is distinct from ev
 
 ## Prohibited use
 
-The tool must not be used to generate or substantially draft a report, evaluation, or recommendation for confidential third-party material received under any expectation of confidentiality.
+The tool must not be used to generate or substantially draft a report, evaluation, or recommendation for confidential third-party material, or for third-party work connected to a confidential evaluation role even when the same text is public.
 
 In particular, the tool must not be used to:
 
 - upload or analyze confidential third-party material received as a referee, editor, committee member, program-committee member, grant reviewer, hiring reviewer, tenure reviewer, admissions reviewer, prize-committee member, or other evaluator without explicit authorization under the applicable policy;
-- prepare or submit a report, evaluation, or recommendation for confidential third-party material while concealing AI assistance;
+- prepare or submit a report, evaluation, or recommendation for confidential third-party material, or for public text being evaluated under a confidential role, while concealing AI assistance;
 - replace the evaluator's own expert judgment in any confidential review or evaluation;
 - evade journal, publisher, society, institutional, funding-body, or committee policies on confidentiality, disclosure, or AI use.
 

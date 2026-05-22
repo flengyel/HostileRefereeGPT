@@ -123,7 +123,6 @@ HostileRefereeGPT/
 │   └── build-prompt.ps1
 └── build/
     └── hostile-referee-gpt-cat-rec.prompt.md
-    
 ```
 
 Only the modules named in `Makefile` are included in the built prompt.
@@ -281,6 +280,8 @@ If the build fits and the module should be part of the deployed GPT, update `DEF
 ## Character limit
 
 The built prompt must be at most 8000 characters. `make verify` enforces this limit.
+
+The PowerShell script reports .NET string length, which can differ from `wc -m` for non-ASCII text. Before deployment, prefer `make verify` when a POSIX build environment is available.
 
 For an alternate output file, check the length directly:
 

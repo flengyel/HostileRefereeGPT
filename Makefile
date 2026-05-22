@@ -41,6 +41,11 @@ audit-build:
 # Policy-contract checks. These verify repository design invariants, not user-prompt classification.
 audit-policy: build
 	@test -f scripts/build-prompt.ps1
+	@grep -Fq "[IO.File]::ReadAllBytes" scripts/build-prompt.ps1
+	@grep -Fq "Stream.Write" scripts/build-prompt.ps1
+	@if grep -Eq 'Get-Content|Set-Content|Out-File' scripts/build-prompt.ps1; then \
+		echo "ERROR: PowerShell build script must byte-concatenate; avoid Get-Content, Set-Content, and Out-File"; exit 1; \
+	fi
 	@grep -Fq "confidential third-party" header.md
 	@grep -Eq "confidential evaluation|confidential evaluator|under confidential evaluation" header.md
 	@grep -Eq "public text|publicly available|including public text" header.md

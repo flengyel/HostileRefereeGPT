@@ -180,116 +180,33 @@ Generated prompt files. These files are committed intentionally.
 
 ## Requirements
 
-The Makefile workflow requires:
+The Makefile path requires Git, GNU make, `cat`, `wc`, and a POSIX-style shell.
 
-- Git;
-- `make`;
-- `cat`;
-- `wc`;
-- a shell that can run the commands in `Makefile`.
-
-On Windows, the Makefile path works under WSL or MSYS2 with `make` installed. Git Bash may also work if GNU `make` is installed and on `PATH`.
-
-A PowerShell build script is provided at:
-
-```text
-scripts/build-prompt.ps1
-```
+On Windows, WSL and MSYS2 work well. Git Bash also works if GNU make is installed and on `PATH`. If no `make` is available, use the PowerShell script at `scripts/build-prompt.ps1`.
 
 ## Build
 
-Default build:
-
-```sh
-make
-```
-
-Explicit build:
-
-```sh
-make MODULES="category-theory recursion-categories"
-```
-
-Verify the build and the character limit:
+Run the full build check from the repository root:
 
 ```sh
 make verify
 ```
 
-Remove generated files:
+This rebuilds the deployed prompt, enforces the 8000-character limit, checks that the committed build output is current, and runs the policy-contract audit.
 
-```sh
-make clean
-```
+For a build without the audit, run `make`. To remove generated files, run `make clean`.
 
-After `make clean`, rebuild before committing:
-
-```sh
-make
-git status
-```
-
-## Windows builds
-
-The canonical build is still the Makefile path. In WSL or MSYS2, run from the repository root:
-
-```sh
-make verify
-```
-
-In Git Bash, first confirm that `make` is available:
-
-```sh
-make --version
-make verify
-```
-
-If `make` is not available, use WSL, MSYS2, or the PowerShell script.
-
-PowerShell build from the repository root:
+PowerShell without `make`:
 
 ```powershell
 .\scripts\build-prompt.ps1
 ```
 
-PowerShell build with a different module selection:
-
-```powershell
-.\scripts\build-prompt.ps1 `
-  -Modules category-theory,logic-foundations `
-  -Out build/scratch.prompt.md
-```
-
-The PowerShell script byte-concatenates the same source files as the Makefile. The script avoids text joining and `Set-Content` since those can change the generated prompt.
-
-## Safety check after build
-
-Run:
-
-```sh
-make verify
-
-grep -n "confidential third-party" build/hostile-referee-gpt-cat-rec.prompt.md
-grep -n "No concealed AI assistance in peer review." build/hostile-referee-gpt-cat-rec.prompt.md
-```
-
-Expected result: `make verify` passes, and both `grep` commands print matching lines.
+The PowerShell script byte-concatenates the same source files as the Makefile. Do not replace it with text joining or `Set-Content`; either can change the generated prompt.
 
 ## Use in GPT Builder
 
-Build and verify first:
-
-```sh
-make verify
-```
-
-Then copy the full contents of:
-
-```text
-build/hostile-referee-gpt-cat-rec.prompt.md
-```
-
-into the GPT Builder **Instructions** field.
+After `make verify` passes, copy the full contents of `build/hostile-referee-gpt-cat-rec.prompt.md` into the GPT Builder **Instructions** field.
 
 Suggested GPT fields:
 
@@ -317,23 +234,23 @@ For author-side self-review, simulate the objections a hostile referee would rai
 
 ## Change the selected modules
 
-The default module selection is set in `Makefile`:
+The default module selection is set by these Makefile variables:
 
 ```make
-MODULES ?= category-theory recursion-categories
-OUT ?= build/hostile-referee-gpt-cat-rec.prompt.md
+DEFAULT_MODULES := category-theory recursion-categories
+DEFAULT_OUT := build/hostile-referee-gpt-cat-rec.prompt.md
+MODULES ?= $(DEFAULT_MODULES)
+OUT ?= $(DEFAULT_OUT)
 LIMIT := 8000
 ```
 
-To test a different selection:
+To test a different selection without overwriting the deployed build output:
 
 ```sh
 make MODULES="category-theory logic-foundations" OUT=build/scratch.prompt.md
 ```
 
-To make a selection permanent, edit `MODULES` in `Makefile`.
-
-If the selected modules change, also update `OUT` so the filename describes the build.
+To make a selection permanent, edit `DEFAULT_MODULES` and `DEFAULT_OUT` in `Makefile`, then rebuild and verify.
 
 ## Add a module
 
@@ -353,25 +270,19 @@ A module should contain:
 - toy tests or minimal counterexamples;
 - output requirements.
 
-Test the module with:
+Test the module with an explicit output path:
 
 ```sh
 make MODULES="category-theory algebraic-topology" OUT=build/hostile-referee-gpt-cat-top.prompt.md
 ```
 
-If the build fits within the 8000 character limit and the module should be included in the deployed GPT, update `Makefile`.
+If the build fits and the module should be part of the deployed GPT, update `DEFAULT_MODULES` and `DEFAULT_OUT` in `Makefile`.
 
 ## Character limit
 
-The built prompt must be at most 8000 characters.
+The built prompt must be at most 8000 characters. `make verify` enforces this limit.
 
-Check the length with:
-
-```sh
-make verify
-```
-
-or:
+For an alternate output file, check the length directly:
 
 ```sh
 wc -m build/hostile-referee-gpt-cat-top.prompt.md
@@ -432,16 +343,12 @@ After editing source instructions:
 ```sh
 make verify
 git status
-git add header.md workflow.md modules/ build/ README.md ETHICAL_USE.md GPT_BUILDER.md Makefile .gitignore LICENSE
+git add header.md workflow.md modules/ build/ scripts/ README.md ETHICAL_USE.md GPT_BUILDER.md Makefile .gitignore LICENSE
 git commit -m "Update GPT self-audit instructions"
 git push
 ```
 
-Then update the GPT Builder Instructions field with the contents of:
-
-```text
-build/hostile-referee-gpt-cat-rec.prompt.md
-```
+Then update the GPT Builder Instructions field with the contents of `build/hostile-referee-gpt-cat-rec.prompt.md`.
 
 Commit source and build together when the built prompt changes.
 
@@ -449,7 +356,7 @@ Commit source and build together when the built prompt changes.
 
 ### `make` is not recognized
 
-Use Git Bash, WSL, MSYS2, or the PowerShell build above.
+Use WSL or MSYS2 with GNU make installed. Git Bash also works if GNU make is on `PATH`. Without `make`, run `scripts/build-prompt.ps1` from PowerShell.
 
 ### The build exceeds 8000 characters
 
@@ -457,13 +364,7 @@ Remove lower-priority text, shorten module wording, or reduce the selected modul
 
 ### GPT Builder refuses the instructions
 
-Run:
-
-```sh
-make verify
-```
-
-Then paste only the contents of the built prompt file.
+Run the canonical build check again, then paste only the contents of the built prompt file.
 
 ### The GPT gives comments without anchors
 
@@ -477,7 +378,7 @@ Edit the relevant file in `modules/`. Rebuild and update GPT Builder.
 
 Do not deploy it.
 
-Edit `header.md` to strengthen the peer-review boundary and refusal rule, rebuild, rerun the safety checks, and retest the disallowed prompts.
+Edit `header.md` to strengthen the peer-review boundary and refusal rule, rebuild, and retest the disallowed prompts.
 
 ## License
 

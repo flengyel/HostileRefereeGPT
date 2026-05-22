@@ -119,8 +119,11 @@ HostileRefereeGPT/
 │   ├── algorithms-numerics.md
 │   ├── empirical-computational.md
 │   └── physics-units.md
+├── scripts/
+│   └── build-prompt.ps1
 └── build/
     └── hostile-referee-gpt-cat-rec.prompt.md
+    
 ```
 
 Only the modules named in `Makefile` are included in the built prompt.
@@ -185,7 +188,13 @@ The Makefile workflow requires:
 - `wc`;
 - a shell that can run the commands in `Makefile`.
 
-On Windows, Git Bash, WSL, or MSYS2 is sufficient. A PowerShell-only build is given below.
+On Windows, the Makefile path works under WSL or MSYS2 with `make` installed. Git Bash may also work if GNU `make` is installed and on `PATH`.
+
+A PowerShell build script is provided at:
+
+```text
+scripts/build-prompt.ps1
+```
 
 ## Build
 
@@ -220,37 +229,38 @@ make
 git status
 ```
 
-## PowerShell build without `make`
+## Windows builds
 
-From the repository root:
+The canonical build is still the Makefile path. In WSL or MSYS2, run from the repository root:
 
-```powershell
-New-Item -ItemType Directory -Force build | Out-Null
-
-$files = @(
-  "header.md",
-  "workflow.md",
-  "modules/category-theory.md",
-  "modules/recursion-categories.md"
-)
-
-$text = ($files | ForEach-Object { Get-Content $_ -Raw }) -join "`n"
-
-Set-Content `
-  -Path "build/hostile-referee-gpt-cat-rec.prompt.md" `
-  -Value $text `
-  -NoNewline `
-  -Encoding utf8
-
-$chars = $text.Length
-Write-Host "Built build/hostile-referee-gpt-cat-rec.prompt.md ($chars characters)"
-
-if ($chars -gt 8000) {
-  throw "GPT Builder limit exceeded: $chars > 8000"
-}
+```sh
+make verify
 ```
 
-For prompts near the limit, `make verify` is canonical. PowerShell’s `$text.Length` counts .NET string code units, which is normally adequate for this mostly plain-text prompt but may differ from other character-counting tools for non-ASCII text.
+In Git Bash, first confirm that `make` is available:
+
+```sh
+make --version
+make verify
+```
+
+If `make` is not available, use WSL, MSYS2, or the PowerShell script.
+
+PowerShell build from the repository root:
+
+```powershell
+.\scripts\build-prompt.ps1
+```
+
+PowerShell build with a different module selection:
+
+```powershell
+.\scripts\build-prompt.ps1 `
+  -Modules category-theory,logic-foundations `
+  -Out build/scratch.prompt.md
+```
+
+The PowerShell script byte-concatenates the same source files as the Makefile. The script avoids text joining and `Set-Content` since those can change the generated prompt.
 
 ## Safety check after build
 

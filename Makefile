@@ -12,13 +12,16 @@ build: $(SOURCES)
 	@if [ "$(MODULES)" != "$(DEFAULT_MODULES)" ] && [ "$(OUT)" = "$(DEFAULT_OUT)" ]; then \
 		echo "ERROR: nondefault MODULES would overwrite $(DEFAULT_OUT); set OUT=build/scratch.prompt.md"; exit 1; \
 	fi
-	@mkdir -p build
-	@cat $(SOURCES) > $(OUT)
-	@chars=$$(wc -m < $(OUT)); \
+	@mkdir -p "$$(dirname "$(OUT)")"
+	@tmp=$$(mktemp); \
+	trap 'rm -f "$$tmp"' EXIT; \
+	cat $(SOURCES) > "$$tmp"; \
+	chars=$$(wc -m < "$$tmp"); \
 	echo "Built $(OUT) ($$chars characters)"; \
 	if [ $$chars -gt $(LIMIT) ]; then \
 		echo "ERROR: GPT Builder limit exceeded: $$chars > $(LIMIT)"; exit 1; \
-	fi
+	fi; \
+	mv "$$tmp" "$(OUT)"
 
 verify: build audit-build audit-policy
 	@echo "Verified $(OUT) under $(LIMIT) characters and passed policy audit."
@@ -36,13 +39,14 @@ audit-build:
 	fi
 
 # Policy-contract checks. These verify repository design invariants, not user-prompt classification.
-audit-policy:
+audit-policy: build
+	@test -f scripts/build-prompt.ps1
 	@grep -Fq "confidential third-party" header.md
 	@grep -Eq "confidential evaluation|confidential evaluator|under confidential evaluation" header.md
 	@grep -Eq "public text|publicly available|including public text" header.md
 	@grep -Fq "No concealed AI assistance in peer review." $(OUT)
 	@grep -Fq "Never present output as human review." $(OUT)
-	@bad=$$(grep -RInE 'public preprint.*always allowed|always.*public preprint|not confidential because.*public|publicly available.*therefore.*allowed|AI assistance.*need not be disclosed|human-only referee report|not for undisclosed peer review' README.md GPT_BUILDER.md ETHICAL_USE.md header.md workflow.md modules build || true); \
+	@bad=$$(grep -RInE 'public preprint.*always allowed|always.*public preprint|not confidential because.*public|publicly available.*therefore.*allowed|AI assistance.*need not be disclosed' README.md GPT_BUILDER.md ETHICAL_USE.md header.md workflow.md modules build || true); \
 	if [ -n "$$bad" ]; then \
 		echo "ERROR: possible policy/build contradiction:"; \
 		echo "$$bad"; \

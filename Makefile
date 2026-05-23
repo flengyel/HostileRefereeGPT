@@ -41,6 +41,7 @@ audit-build:
 # Policy-contract checks. These verify repository design invariants, not user-prompt classification.
 audit-policy: build
 	@test -f scripts/build-prompt.ps1
+	@test -f CUSTOM_INSTRUCTIONS.txt
 	@grep -Fq "[IO.File]::ReadAllBytes" scripts/build-prompt.ps1
 	@grep -Fq "Stream.Write" scripts/build-prompt.ps1
 	@if grep -Eq 'Get-Content|Set-Content|Out-File|Add-Content' scripts/build-prompt.ps1; then \

@@ -104,6 +104,7 @@ HostileRefereeGPT/
 ├── Makefile
 ├── README.md
 ├── GPT_BUILDER.md
+├── CUSTOM_INSTRUCTIONS.txt
 ├── LICENSE
 ├── ETHICAL_USE.md
 ├── .gitignore
@@ -172,6 +173,10 @@ recursion-categories
 ```
 
 Other module files may be kept in `modules/` without being included in the build.
+
+### `CUSTOM_INSTRUCTIONS.txt`
+
+Custom instructions used to reproduce the maintainer's general-assistant style while discussing or maintaining this repository. They are included for reproducibility of repository-maintenance discussions, not as deployed GPT instructions. They are not part of the built GPT prompt, are not included by `Makefile`, and should not be pasted into GPT Builder Instructions.
 
 ### `build/`
 
@@ -344,7 +349,7 @@ After editing source instructions:
 ```sh
 make verify
 git status
-git add header.md workflow.md modules/ build/ scripts/ README.md ETHICAL_USE.md GPT_BUILDER.md Makefile .gitignore LICENSE
+git add header.md workflow.md modules/ build/ scripts/ README.md ETHICAL_USE.md GPT_BUILDER.md CUSTOM_INSTRUCTIONS.txt Makefile .gitignore LICENSE
 git commit -m "Update GPT self-audit instructions"
 git push
 ```
